@@ -57,7 +57,8 @@ class Trainer(object):
         """
         # select random word IDs
         bs = self.params.batch_size
-        mf = self.params.dis_most_frequent
+        # mf = self.params.dis_most_frequent
+        mf = min(self.params.dis_most_frequent, min(len(self.src_dico), len(self.tgt_dico)))
         assert mf <= min(len(self.src_dico), len(self.tgt_dico))
         src_ids = torch.LongTensor(bs).random_(len(self.src_dico) if mf == 0 else mf)
         tgt_ids = torch.LongTensor(bs).random_(len(self.tgt_dico) if mf == 0 else mf)
